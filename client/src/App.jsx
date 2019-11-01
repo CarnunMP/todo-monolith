@@ -9,7 +9,7 @@ function App() {
   useEffect(() => {
     axios.get(`${(process.env.REACT_APP_API || '')}/api/dummy`)
       .then((res) => {
-        setDummyData(res.dummyData);
+        setDummyData(res.data);
       })
       .catch((err) => {
         alert(err);
@@ -22,7 +22,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit
-          <code>src/App.js</code>
+          <code> src/App.js </code>
           and save to reload.
         </p>
         <a
@@ -31,7 +31,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {dummyData.map((item) => (
+          {dummyData && dummyData.map((item) => (
             item.text
           ))}
         </a>
