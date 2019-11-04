@@ -1,10 +1,23 @@
 import * as types from './actionTypes';
 // import axios from 'axios';
 
-export function incrementCount() {
-  return { type: types.INCREMENT };
-}
+// Test counter
+// export function incrementCount() {
+//   return { type: types.INCREMENT };
+// }
+// export function decrementCount() {
+//   return { type: types.DECREMENT };
+// }
+// ---
 
-export function decrementCount() {
-  return { type: types.DECREMENT };
+export function toggleCompleted(item) {
+  const toggledItem = {
+    ...item,
+    completed: !item.completed,
+  }
+
+  return { 
+    type: types.TOGGLE_COMPLETED,
+    payload: toggledItem,
+  }
 }

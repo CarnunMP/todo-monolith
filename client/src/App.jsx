@@ -10,10 +10,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import * as reducers from './state/reducers';
 
-import Counter from './components/Counter';
+// import Counter from './components/Counter';
+import ListItems from './components/list/ListItems';
 
 const rootReducer = combineReducers({
-  count: reducers.countReducer,
+  // count: reducers.countReducer,
+  items: reducers.itemsReducer,
 });
 
 const store = createStore(
@@ -30,7 +32,8 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Counter />
+        {/* <Counter /> */}
+        <ListItems />
       </div>
     </Provider>
   );

@@ -15,6 +15,6 @@ function Counter(props) {
 }
 
 export default connect(
-  (state) => state,
+  state => state,
   actionCreators,
 )(Counter);
