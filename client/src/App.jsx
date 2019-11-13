@@ -1,26 +1,41 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './App.css';
+import {
+  combineReducers,
+  createStore,
+  compose,
+  applyMiddleware,
+} from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import * as reducers from './state/reducers';
+
+// import Counter from './components/Counter';
+import ListItems from './components/list/ListItems';
+
+const rootReducer = combineReducers({
+  // count: reducers.countReducer,
+  items: reducers.itemsReducer,
+});
+
+const store = createStore(
+  rootReducer,
+  {},
+  compose(
+    applyMiddleware(thunk),
+    // eslint-disable-next-line no-underscore-dangle
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  ),
+);
 
 function App() {
-  const [dummyData, setDummyData] = useState(null);
-
-  useEffect(() => {
-    axios.get(`${(process.env.REACT_APP_API || '')}/api/dummy`)
-      .then((res) => {
-        setDummyData(res.data);
-      })
-      .catch((err) => {
-        alert(err);
-      });
-  }, []);
-
   return (
-    <div className="App">
-      {dummyData && dummyData.map((item) => (
-        item.text
-      ))}
-    </div>
+    <Provider store={store}>
+      <div className="App">
+        {/* <Counter /> */}
+        <ListItems />
+      </div>
+    </Provider>
   );
 }
 
