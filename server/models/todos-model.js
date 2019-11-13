@@ -3,6 +3,7 @@ const db = require('../../data/db-config');
 module.exports = {
   find,
   findById,
+  findByListId,
   add,
   edit,
   remove,
@@ -15,6 +16,18 @@ function find() {
 
 function findById(id) {
   return db('todos').where({ id });
+}
+
+function findByListId(id) {
+  return db('orderings AS o')
+    .join('todos AS t', 'o.todo_id', 't.id')
+    .where({ 'o.list_id': id })
+    .select(
+      'id',
+      'order',
+      'text',
+      'done'
+    );
 }
 
 async function add(todo) {

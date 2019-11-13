@@ -2,7 +2,6 @@ const db = require('../../data/db-config');
 
 module.exports = {
   find,
-  findByTitle,
   findById,
   add,
   edit,
@@ -11,10 +10,6 @@ module.exports = {
 
 function find() {
   return db('lists');
-}
-
-function findByTitle(title) {
-  return db('lists').where(title);
 }
 
 function findById(id) {
